@@ -1,0 +1,69 @@
+repeat task.wait(0.25) until game:IsLoaded();
+local ScreenGui = Instance.new("ScreenGui");
+ScreenGui.Parent = game.CoreGui;
+
+local LoaderFrame = Instance.new("Frame");
+LoaderFrame.Parent = ScreenGui;
+LoaderFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0);
+LoaderFrame.Size = UDim2.new(0.2, 0, 0.15, 0);
+LoaderFrame.Position = UDim2.new(0.4, 0, 0.425, 0);
+LoaderFrame.BorderSizePixel = 0;
+
+local CornerUI = Instance.new("UICorner");
+CornerUI.CornerRadius = UDim.new(0,15);
+CornerUI.Parent = LoaderFrame;
+
+local Icon = Instance.new("ImageLabel")
+Icon.Parent = LoaderFrame
+Icon.Size = UDim2.new(0,40,0,40);
+Icon.Position = UDim2.new(0.05,0,0.25,0);
+Icon.BackgroundTransparency = 1;
+Icon.Image = "http://www.roblox.com/asset/?id=11803247078";
+
+local Title = Instance.new("TextLabel");
+Title.Parent = LoaderFrame;
+Title.Size = UDim2.new(0.6,0,0.3,0);
+Title.Position = UDim2.new(0.20, 0, 0.25, 0);
+Title.BackgroundTransparency = 1;
+Title.Text = "Flame's Hub Launcher";
+Title.TextColor3 = Color3.new(1,1,1);
+Title.TextScaled = true;
+Title.Font = Enum.Font.SourceSansBold;
+
+local LoadingBarBackground = Instance.new("Frame");
+LoadingBarBackground.Parent = LoaderFrame;
+LoadingBarBackground.Size = UDim2.new(0.9,0,0.15,0);
+LoadingBarBackground.Position = UDim2.new(0.05,0,0.75,0);
+LoadingBarBackground.BackgroundColor3 = Color3.new(0.2,0.2,0.2);
+
+local LoadingBar = Instance.new("Frame");
+LoadingBar.Parent = LoadingBarBackground;
+LoadingBar.Size = UDim2.new(0,0,1,0);
+LoadingBar.BackgroundColor3 = Color3.new(1,1,1);
+
+local Version = Instance.new("TextLabel");
+Version.Parent = LoaderFrame;
+Version.Size = UDim2.new(0,60,0,20);
+Version.Position = UDim2.new(0.85,0,0.05,0);
+Version.BackgroundTransparency = 1;
+Version.Text = tostring(getgenv().CurrentVersion);
+Version.TextColor3 = Color3.new(1,1,1);
+Version.TextScaled = true;
+Version.Font = Enum.Font.SourceSansBold;
+
+task.wait(0.35);
+for i = 1,100 do
+    LoadingBar.Size = UDim2.new(i/100,0,1,0);
+    task.wait(0.01);
+end
+
+task.wait(0.35);
+for i = 1,10 do task.wait(0.05);
+    LoaderFrame.BackgroundTransparency = i/10;
+    LoadingBar.BackgroundTransparency = i/10;
+    LoadingBarBackground.BackgroundTransparency = i/10;
+    Title.TextTransparency = i/10;
+    Icon.ImageTransparency = i/10;
+    Version.TextTransparency = i/10;
+end
+LoaderFrame:Destroy();
